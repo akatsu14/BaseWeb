@@ -9,7 +9,8 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@screens': path.resolve(__dirname, 'src/screens'),
-      '@navigates': path.resolve(__dirname, 'src/navigates')
+      '@navigates': path.resolve(__dirname, 'src/navigates'),
+      '@reducers': path.resolve(__dirname, 'src/reducers'),
     }
   }
 })

@@ -9,7 +9,6 @@ const RootNavigation = () => {
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/login" element={<Auth authRoute="login" />} />
         <Route exact path="/register" element={<Auth authRoute="register" />} />
-        
       </Routes>
     </Router>
   );
