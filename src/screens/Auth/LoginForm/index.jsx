@@ -2,6 +2,7 @@ import { AuthContext } from "@contexts/AuthContexts";
 import { ScreenName } from "@navigates/ScreenName";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertMessage from "../../../components/layout/AlertMessage";
 const LoginForm = () => {
   //Context
   const { loginUser } = useContext(AuthContext);
@@ -11,29 +12,30 @@ const LoginForm = () => {
 
   //Local state
   const [type, setType] = useState("password");
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
+
+  const [alert, setAlert] = useState(null);
+
   const [loginForm, setLoginForm] = useState({
     username: "",
     password: "",
   });
+
   const { username, password } = loginForm;
 
   const onChangeLoginForm = (event) => {
     setLoginForm({ ...loginForm, [event?.target?.name]: event?.target?.value });
   };
-  console.log("🚀 ~ LoginForm ~ loginForm:", loginForm);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const res = await loginUser(loginForm);
-      if (res.success) {
-        navigate(ScreenName.DashBoard, { replace: true });
+      if (!res.success) {
+        setAlert({ type: "danger", msg: res.msg });
+        setTimeout(() => {
+          setAlert(null);
+        }, 3000);
       }
-      console.log("🚀 ~ handleSubmit ~ res:", res);
-
-      // navigate("/register");
     } catch (error) {
       console.log(error);
     }
@@ -74,6 +76,7 @@ const LoginForm = () => {
             required
           />
         </div>
+        <AlertMessage info={alert} />
         <button
           id="post-button"
           form="inputLoginForm"

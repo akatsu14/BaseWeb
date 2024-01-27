@@ -1,22 +1,43 @@
+import AlertMessage from "@components/layout/AlertMessage";
+import { AuthContext } from "@contexts/AuthContexts";
 import { ScreenName } from "@navigates/ScreenName";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const [type, setType] = useState("password");
   const [registerForm, setRegisterForm] = useState({
     username: "",
     password: "",
     confirmPassword: "",
   });
+
   const { username, password, confirmPassword } = registerForm;
-  const onChangeRegisterForm = (e) =>
-    setRegisterForm({ ...registerForm, [e.target.name]: e.target.value });
+  const onChangeRegisterForm = (event) => {
+    setRegisterForm({ ...registerForm, [event.target.name]: event.target.value });
+  };
+
+  const { registerUser } = useContext(AuthContext);
   const handleSubmit = async (event) => {
-    console.log("🚀 ~ handleSubmit register ~ event:", event);
+    event.preventDefault();
+    if(password !== confirmPassword){
+      setAlert({ type: "danger", msg: "Password do not match" });
+      setTimeout(() => {
+        setAlert(null);
+      }, 3000);
+      return;
+    }
     try {
-      navigate("/login");
+      // navigate("/login");
+      const res = await registerUser(registerForm);
+      if (!res.success) {
+        setAlert({ type: "danger", msg: res.msg });
+        setTimeout(() => {
+          setAlert(null);
+        }, 3000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +93,7 @@ const RegisterForm = () => {
             required
           />
         </div>
+        <AlertMessage info={alert} />
         <button id="post-button" className="m-0 mt-3 bg-green-300 min-w-20">
           Register
         </button>
