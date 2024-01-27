@@ -1,22 +1,47 @@
-import React, { useState } from "react";
+import { AuthContext } from "@contexts/AuthContexts";
+import { ScreenName } from "@navigates/ScreenName";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const LoginForm = () => {
-  const [type, setType] = useState("password");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  //Context
+  const { loginUser } = useContext(AuthContext);
+
+  //Navigate
   const navigate = useNavigate();
+
+  //Local state
+  const [type, setType] = useState("password");
+  // const [name, setName] = useState("");
+  // const [password, setPassword] = useState("");
+  const [loginForm, setLoginForm] = useState({
+    username: "",
+    password: "",
+  });
+  const { username, password } = loginForm;
+
+  const onChangeLoginForm = (event) => {
+    setLoginForm({ ...loginForm, [event?.target?.name]: event?.target?.value });
+  };
+  console.log("🚀 ~ LoginForm ~ loginForm:", loginForm);
+
   const handleSubmit = async (event) => {
-    console.log("🚀 ~ handleSubmit ~ event:", event);
+    event.preventDefault();
     try {
-      navigate("/register");
+      const res = await loginUser(loginForm);
+      if (res.success) {
+        navigate(ScreenName.DashBoard, { replace: true });
+      }
+      console.log("🚀 ~ handleSubmit ~ res:", res);
+
+      // navigate("/register");
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div id="loginForm" className="">
-      <form id="inputLoginForm" onSubmit={(event) => handleSubmit(event)}>
+      <form id="inputLoginForm" onSubmit={handleSubmit}>
         <div className="flex-col">
           <label htmlFor="username" className="block mt-3 text-left">
             Username
@@ -27,8 +52,8 @@ const LoginForm = () => {
             className="block w-full"
             placeholder="Input your username"
             name="username"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={onChangeLoginForm}
             autoComplete="off"
             required
           />
@@ -44,7 +69,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChangeLoginForm}
             autoComplete="off"
             required
           />
@@ -57,12 +82,13 @@ const LoginForm = () => {
           Login
         </button>
       </form>
-      <p className="mt-3 ">
+      <p className="mt-3">
         Don't have an account?
         <button
+          id="goToRegisterButton"
           className="ml-1 px-3 py-2.5 min-w-20 bg-blue-300"
           type="button"
-          onClick={() => navigate("/register", { replace: true })}
+          onClick={() => navigate(ScreenName.Register, { replace: true })}
         >
           Register
         </button>

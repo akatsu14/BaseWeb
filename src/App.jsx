@@ -1,6 +1,11 @@
+import AuthContextProvider from "@contexts/AuthContexts";
 import RootNavigation from "@navigates/RootNavigation";
 const App = () => {
-  return <RootNavigation />;
+  return (
+    <AuthContextProvider>
+      <RootNavigation />
+    </AuthContextProvider>
+  );
 };
 
 export default App;

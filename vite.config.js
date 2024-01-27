@@ -11,6 +11,10 @@ export default defineConfig({
       '@screens': path.resolve(__dirname, 'src/screens'),
       '@navigates': path.resolve(__dirname, 'src/navigates'),
       '@reducers': path.resolve(__dirname, 'src/reducers'),
+      '@commons': path.resolve(__dirname, 'src/commons'),
+      '@contexts': path.resolve(__dirname, 'src/contexts'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      
     }
   }
 })

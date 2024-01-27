@@ -1,12 +1,18 @@
+import { ScreenName } from "@navigates/ScreenName";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
-  const [type, setType] = useState("password");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const [type, setType] = useState("password");
+  const [registerForm, setRegisterForm] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const { username, password, confirmPassword } = registerForm;
+  const onChangeRegisterForm = (e) =>
+    setRegisterForm({ ...registerForm, [e.target.name]: e.target.value });
   const handleSubmit = async (event) => {
     console.log("🚀 ~ handleSubmit register ~ event:", event);
     try {
@@ -17,7 +23,7 @@ const RegisterForm = () => {
   };
   return (
     <div id="loginForm" className="">
-      <form id="inputLoginForm" onSubmit={(event) => handleSubmit(event)}>
+      <form id="inputLoginForm" onSubmit={handleSubmit}>
         <div className="flex-col">
           <label htmlFor="username" className="block mt-3 text-left">
             Username
@@ -28,8 +34,8 @@ const RegisterForm = () => {
             className="block w-full"
             placeholder="Input your username"
             name="username"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={onChangeRegisterForm}
             autoComplete="off"
             required
           />
@@ -45,7 +51,7 @@ const RegisterForm = () => {
             type="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={onChangeRegisterForm}
             autoComplete="off"
             required
           />
@@ -55,13 +61,13 @@ const RegisterForm = () => {
             Confirm Password
           </label>
           <input
-            id="confirm-password"
+            id="confirmPassword"
             className="block w-full"
             placeholder="Input your password"
             type="password"
-            name="confirm-password"
+            name="confirmPassword"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={onChangeRegisterForm}
             autoComplete="off"
             required
           />
@@ -73,8 +79,9 @@ const RegisterForm = () => {
       <p className="mt-3 ">
         Already have an account?
         <button
+          id="goToLoginButton"
           className="ml-1 px-3 py-2.5 min-w-20 bg-blue-300"
-          onClick={() => navigate("/login", { replace: true })}
+          onClick={() => navigate(ScreenName.Login, { replace: true })}
         >
           Login
         </button>
