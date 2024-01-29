@@ -68,9 +68,21 @@ const AuthContextProvider = ({ children }) => {
       else return { success: false, msg: error.message };
     }
   };
-
+  const logout = async () => {
+    try {
+      localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+      setAuthToken(null);
+      dispatch({
+        type: "SET_AUTH",
+        payload: { isAuthenticated: false, user: null },
+      });
+    } catch (error) {
+      if (error.response.data) return error.response.data;
+      else return { success: false, msg: error.message };
+    }
+  };
   //Context data
-  const authContextData = { loginUser, authState, registerUser };
+  const authContextData = { loginUser, authState, registerUser, logout };
 
   //return provider
   return (
