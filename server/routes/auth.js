@@ -26,8 +26,8 @@ router.get("/", verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password)
+  const { username, password, fullname } = req.body;
+  if (!username || !password || !fullname)
     return res
       .status(400)
       .json({ success: false, msg: "Please enter all fields" });
@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
         .json({ success: false, msg: "User already exists" });
     //All good
     const hashedPassword = await agorn2.hash(password);
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ username, password: hashedPassword, fullname });
     await newUser.save();
     // Return token
     const accessToken = jwt.sign(
