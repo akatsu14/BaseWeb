@@ -1,0 +1,56 @@
+### Register
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "jim",
+    "password": "jim"
+}
+
+### Login
+
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "henry",
+    "password": "henry"
+}
+
+### Get a user
+GET http://localhost:5000/api/auth/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDY2NjgxOTV9.bDIxiZjIpOFb4kpnjyV6cuPKZW9WAsL1icxzMun2nvY
+
+### Post a new item
+
+POST http://localhost:5000/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI0MTJmMDEzNTUwZTczN2IwMWQ3N2MiLCJpYXQiOjE3MDYzMDAxNDR9.EbIKUFj4ibHzkGlMLOs0OPpceAJX4xT0B_0MjKOmTss
+
+{
+     "title": "My first book",
+     "price": 10,
+     
+    "description": "This is my first book"
+}
+
+### Get all posts
+
+GET http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDY2NjgxOTV9.bDIxiZjIpOFb4kpnjyV6cuPKZW9WAsL1icxzMun2nvY
+
+### Update a post
+
+PUT http://localhost:5000/api/posts/65b41078e5bc161ef98b95fd
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI0MGJmNTliYmRlMWQ2YmE0YTlhZmMiLCJpYXQiOjE3MDYzMDExNDd9.gPOtFMaH6kTbtYWPKLNX093VQJjD1h8VEjTk2X749qk
+
+{
+    "title": "My second book",
+    "description": "This is my second book"
+}
+
+### Delete a post
+DELETE http://localhost:5000/api/posts/65b41078e5bc161ef98b95fd
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI0MGJmNTliYmRlMWQ2YmE0YTlhZmMiLCJpYXQiOjE3MDYzMDExNDd9.gPOtFMaH6kTbtYWPKLNX093VQJjD1h8VEjTk2X749qk
+
