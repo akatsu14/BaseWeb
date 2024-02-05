@@ -1,6 +1,6 @@
 const ItemTrong = () => {
   return (
-    <div className="text-center text-lg text-gray-400">Không có dữ liệu</div>
+    <div className="flex w-full h-full p-3 items-center justify-center text-lg text-gray-400">Không có dữ liệu</div>
   );
 };
 export default ItemTrong;

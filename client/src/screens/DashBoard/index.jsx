@@ -67,25 +67,27 @@ const DashBoard = () => {
     <div className="flex min-h-screen bg-gray-50  flex-col w-screen">
       <HeaderBar onRefresh={onRefresh} />
       <div id="background" className="flex justify-center align-middle p-3 ">
-        <Row
+        <div
           id="listItem"
-          className="flex min-h-screen bg-white h-full w-4/5 rounded-lg row-cols-1 row-cols-md-2 mx-auto pb-3"
+          className="flex min-h-screen bg-white w-4/5 rounded-lg mx-auto justify-center items-start p-3"
         >
-          {data.length ? (
-            data?.map((item, index) => (
-              <Col key={item._id} className="px-3 pt-3">
-                <ItemSach
-                  item={item}
-                  key={item?._id}
-                  isLast={index === data.length - 1}
-                  onRefresh={onRefresh}
-                />
-              </Col>
-            ))
-          ) : (
-            <ItemTrong />
-          )}
-        </Row>
+          <Row lg={2} className="w-full">
+            {data.length ? (
+              data?.map((item, index) => (
+                <Col key={item._id} className="px-3 pt-3">
+                  <ItemSach
+                    item={item}
+                    key={item?._id}
+                    isLast={index === data.length - 1}
+                    onRefresh={onRefresh}
+                  />
+                </Col>
+              ))
+            ) : (
+              <ItemTrong />
+            )}
+          </Row>
+        </div>
         <Fab onClick={handleShow} />
       </div>
       <ModalPost

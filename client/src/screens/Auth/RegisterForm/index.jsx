@@ -12,17 +12,21 @@ const RegisterForm = () => {
     username: "",
     password: "",
     confirmPassword: "",
+    fullname: "",
   });
 
-  const { username, password, confirmPassword } = registerForm;
+  const { username, password, confirmPassword, fullname } = registerForm;
   const onChangeRegisterForm = (event) => {
-    setRegisterForm({ ...registerForm, [event.target.name]: event.target.value });
+    setRegisterForm({
+      ...registerForm,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const { registerUser } = useContext(AuthContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       setAlert({ type: "danger", msg: "Password do not match" });
       setTimeout(() => {
         setAlert(null);
@@ -45,6 +49,22 @@ const RegisterForm = () => {
   return (
     <div id="loginForm" className="">
       <form id="inputLoginForm" onSubmit={handleSubmit}>
+         <div className="flex-col">
+          <label htmlFor="fullname" className="block mt-3 text-left">
+            Full Name
+          </label>
+          <input
+            id="fullname"
+            type="text"
+            className="block w-full"
+            placeholder="Input your fullname"
+            name="fullname"
+            value={fullname}
+            onChange={onChangeRegisterForm}
+            autoComplete="off"
+            required
+          />
+        </div>
         <div className="flex-col">
           <label htmlFor="username" className="block mt-3 text-left">
             Username

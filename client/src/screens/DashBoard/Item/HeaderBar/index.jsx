@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 const HeaderBar = (props) => {
   const {
     authState: {
-      user: { username },
+      user: { fullname },
     },
     logout,
   } = useContext(AuthContext);
@@ -24,7 +24,7 @@ const HeaderBar = (props) => {
       "Are you sure?",
       "Do you want to log out?",
       () => {},
-      () => onLogOut
+      () => onLogOut()
     );
   };
   return (
@@ -33,7 +33,7 @@ const HeaderBar = (props) => {
         <img src={bookLibrary} alt="bookLibrary" />
         <h2 className="">My Book</h2>
       </div>
-      <div>Xin chào {username}</div>
+      <div>Xin chào {fullname}</div>
       <button
         className="bg-blue-500 flex flex-row justify-center items-center"
         onClick={handleLogOut}
