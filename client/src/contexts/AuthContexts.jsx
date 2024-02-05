@@ -83,9 +83,8 @@ const AuthContextProvider = ({ children }) => {
       else return { success: false, msg: error.message };
     }
   };
-  
   //Context data
-  const authContextData = { loginUser, authState, registerUser, logout };
+  const authContextData = { loginUser, authState, registerUser,logout };
 
   //return provider
   return (
