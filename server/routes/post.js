@@ -85,6 +85,8 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
     const postDeleteCondition = { _id: req.params.id, user: req.userId };
+    const { title, price, ngayMua, img, status } = req.body;
+
     const deletedPost = await Post.findOneAndDelete(postDeleteCondition);
     // User not authorised or post not found
     if (!deletedPost)
@@ -98,4 +100,5 @@ router.delete("/:id", verifyToken, async (req, res) => {
     res.status(500).json({ success: false, msg: "Internal server error" });
   }
 });
+
 module.exports = router;

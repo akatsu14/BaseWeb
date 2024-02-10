@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
+const deletedpostRouter = require("./routes/deletedpost");
 // DB Config
 const connectDB = async () => {
   try {
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
+app.use("/api/deletedposts", deletedpostRouter);
 // const port = process.env.PORT || 3000;
 const PORT = process.env.PORT||5000;
 
