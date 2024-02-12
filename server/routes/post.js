@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middleware/auth");
 const Post = require("../models/Post");
+const DeletedPost = require("../models/DeletedPost");
 
 // @route GET api/posts
 // @desc Get post
@@ -85,7 +86,19 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
     const postDeleteCondition = { _id: req.params.id, user: req.userId };
-    const { title, price, ngayMua, img, status } = req.body;
+    const posts = await Post.find(postDeleteCondition);
+    console.log("🚀 ~ posts:", posts)
+    const { title, price, ngayMua, img, status } = posts[0];
+    const newDeletedPost = new DeletedPost({
+      title,
+      price,
+      ngayMua,
+      img,
+      status: status || "To Read",
+      user: req.userId,
+      _id: req.params.id,
+    });
+    console.log("🚀 ~ router.delete ~ try {.newDeletedPost:", newDeletedPost);
 
     const deletedPost = await Post.findOneAndDelete(postDeleteCondition);
     // User not authorised or post not found
@@ -95,6 +108,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
         msg: "Post not found or user not authorised",
       });
     res.json({ success: true, post: deletedPost });
+    await newDeletedPost.save();
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, msg: "Internal server error" });

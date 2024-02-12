@@ -28,10 +28,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
 
 {
-     "title": "My first book",
-     "price": 10,
-     
-    "description": "This is my first book"
+    "title":"Nghệ thuật tư duy ngược dòng2222",
+    "price":119000,
+    "ngayMua":"2024-01-01T00:00:00.000+00:00",
+    "img":"https://salt.tikicdn.com/cache/750x750/ts/product/4b/12/ee/7b86d74f3ac…",
+    "status":"Done"
 }
 
 ### Get all posts
@@ -51,19 +52,35 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI0M
 }
 
 ### Delete a post
-DELETE http://localhost:5000/api/posts/65b41078e5bc161ef98b95fd
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI0MGJmNTliYmRlMWQ2YmE0YTlhZmMiLCJpYXQiOjE3MDYzMDExNDd9.gPOtFMaH6kTbtYWPKLNX093VQJjD1h8VEjTk2X749qk
+DELETE http://localhost:5000/api/posts/65c9a18df3671712d1cba15a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
 
-### Post a new item
+### Post a deleted post
 
 POST http://localhost:5000/api/deletedposts
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
 
 {
-    "post":{
-        "title": "My first book",
-        "price": 10,
-        "description": "This is my first book"
-    }
+    "title":"Nghệ thuật tư duy ngược dòng",
+    "price":119000,
+    "ngayMua":"2024-01-01T00:00:00.000+00:00",
+    "img":"https://salt.tikicdn.com/cache/750x750/ts/product/4b/12/ee/7b86d74f3ac…",
+    "status":"To Read"
 }
+### Get all deleted posts
+GET http://localhost:5000/api/deletedposts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
+
+### Reverse a deleted post
+DELETE http://localhost:5000/api/deletedposts/65c9a18df3671712d1cba15a
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
+
+{
+    "isReversePost": "true"
+}
+
+### Delete a deleted post
+DELETE http://localhost:5000/api/deletedposts/65c9a18df3671712d1cba15a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWI1MzE4NTU0NzNmZjRlZTc1ZTJlZDMiLCJpYXQiOjE3MDc1MDk4MDF9.SRKBz_KmgJlLu-LiPd--JxuYsLL3BqqPFL5wPTxACxM
