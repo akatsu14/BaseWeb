@@ -5,6 +5,7 @@ import { AuthContext } from "@contexts/AuthContexts";
 import React, { useContext } from "react";
 
 const HeaderBar = (props) => {
+  const { mainText } = props;
   const {
     authState: {
       user: { fullname },
@@ -29,18 +30,20 @@ const HeaderBar = (props) => {
   };
   return (
     <div className="bg-green-500 flex flex-row items-center justify-between w-full py-3 pl-0 pr-3 ">
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-center">
         <img src={bookLibrary} alt="bookLibrary" />
-        <h2 className="">My Book</h2>
+        <h2 className="">{mainText ?? "My Book"}</h2>
       </div>
-      <div>Xin chào {fullname}</div>
-      <button
-        className="bg-blue-500 flex flex-row justify-center items-center"
-        onClick={handleLogOut}
-      >
-        <label className="mr-2">Logout</label>
-        <ItemIconSVG title={SVGTitle.IconLogOut} className="w-4 h-4" />
-      </button>
+      <div>Xin chào <strong>{fullname}</strong></div>
+      {!mainText ? (
+        <button
+          className="bg-blue-500 flex flex-row justify-center items-center"
+          onClick={handleLogOut}
+        >
+          <label className="mr-2">Logout</label>
+          <ItemIconSVG title={SVGTitle.IconLogOut} className="w-4 h-4" />
+        </button>
+      ):<></>}
     </div>
   );
 };

@@ -50,7 +50,13 @@ input{
   border: 1px solid #F0F0F0;
   border-radius: 6px;
 }
-
+select{
+  padding: 6px 12px ;
+  margin: 0;
+  margin-top: 8px;
+  border: 1px solid #F0F0F0;
+  border-radius: 6px;
+}
 button {
   border-radius: 8px;
   border: 1px solid #F0F0F0;

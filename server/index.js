@@ -1,10 +1,14 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+
 const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
 const deletedpostRouter = require("./routes/deletedpost");
+
 // DB Config
 const connectDB = async () => {
   try {
@@ -26,10 +30,12 @@ const app = express();
 app.get("/", (req, res) => res.send("Hello World"));
 app.use(express.json());
 app.use(cors());
+app.use(morgan("common"));
+app.use(bodyParser.json());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/deletedposts", deletedpostRouter);
 // const port = process.env.PORT || 3000;
-const PORT = process.env.PORT||5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

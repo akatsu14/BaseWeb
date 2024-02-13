@@ -1,6 +1,7 @@
 import Landing from "@components/layout/Landing";
 import ProtectedRoute from "@components/routing/ProtectedRoute";
 import Auth from "@screens/Auth";
+import BookStore from "@screens/BookStore";
 import DashBoard from "@screens/DashBoard";
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -26,6 +27,15 @@ const RootNavigation = () => {
           element={
             <ProtectedRoute>
               <DashBoard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          exact
+          path={ScreenName.BookStore}
+          element={
+            <ProtectedRoute>
+              <BookStore />
             </ProtectedRoute>
           }
         />

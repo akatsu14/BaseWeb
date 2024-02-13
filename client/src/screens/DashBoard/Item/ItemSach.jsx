@@ -8,7 +8,7 @@ import ModalPost from "./ModalPost";
 const ItemSach = (props) => {
   const { onRefresh, item, isLast } = props;
   const { title, price, ngayMua, img, status } = item;
-  console.log("🚀 ~ ItemSach ~ item:", item)
+  console.log("🚀 ~ ItemSach ~ item:", item);
   const { updatePost, deletePost } = useContext(PostContext);
   const [isShowEditBook, setIsShowEditBook] = useState(false);
   const [postForm, setPostForm] = useState(item);
@@ -52,7 +52,9 @@ const ItemSach = (props) => {
   return (
     <div className="flex flex-col border rounded-lg">
       <div className="flex flex-row  p-3">
-        <img src={img} alt="Ảnh quyển sách" className=" w-30 h-40 m-0 p-0" />
+        <div className="w-40 flex items-center justify-center">
+          <img src={img} alt="Ảnh quyển sách" className=" w-30 h-40 m-0 p-0 " />
+        </div>
         <div className="flex flex-col justify-evenly">
           <div id="name" className="mb-1">
             <strong className="mr-1">Tên sách:</strong>

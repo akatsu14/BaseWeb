@@ -13,12 +13,31 @@ const PostContextProvider = ({ children }) => {
   });
 
   //Get all posts
-  const getPosts = async () => {
+  const getPosts = async (props) => {
+    const { sortValue } = props;
     try {
       const response = await axios.get(`${apiUrl}/posts`);
 
       console.log("🚀 ~ getPosts ~ response:", response);
       if (response.data.success) {
+        switch (sortValue) {
+          case "title":
+            response.data.posts.sort((a, b) => {
+              return a.title.localeCompare(b.title);
+            });
+            break;
+          case "price":
+            response.data.posts.sort((a, b) => {
+              return a.price - b.price;
+            });
+            break;
+          default:
+             response.data.posts.sort((a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            break;
+        }
+
         dispatch({ type: "GET_POSTS", payload: response.data.posts });
         return response.data.posts;
       }
@@ -45,7 +64,7 @@ const PostContextProvider = ({ children }) => {
 
   //update post
   const updatePost = async (updatedPost) => {
-    console.log("🚀 ~ updatePost ~ updatedPost:", updatedPost)
+    console.log("🚀 ~ updatePost ~ updatedPost:", updatedPost);
     try {
       const response = await axios.put(
         `${apiUrl}/posts/${updatedPost._id}`,
@@ -75,7 +94,13 @@ const PostContextProvider = ({ children }) => {
     }
   };
   //Post context data
-  const postContextData = { postState, getPosts, createPost, updatePost,deletePost };
+  const postContextData = {
+    postState,
+    getPosts,
+    createPost,
+    updatePost,
+    deletePost,
+  };
 
   return (
     <PostContext.Provider value={postContextData}>

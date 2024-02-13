@@ -21,6 +21,10 @@ const PostSchema = new Schema({
     enum: ["To Read", "Reading", "Done"],
     default: "public",
   },
+  createdAt : {
+    type: Date,
+    default: Date.now
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "users",
